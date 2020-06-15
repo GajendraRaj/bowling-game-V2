@@ -13,12 +13,8 @@ const App = () => {
 
   const updateScores = (downPins) => {
     const newRoll = [...gameState.roll, downPins];
-    let totalScore = 0;
-    if (newRoll.length > 0) {
-      for (let i = 0; i < newRoll.length; i++) {
-        totalScore += newRoll[i];
-      }
-    }
+    const totalScore =
+      newRoll.length > 0 ? getTotalScore(newRoll) : gameState.totalScore;
 
     setGameState((prevState) => {
       return {
@@ -27,6 +23,15 @@ const App = () => {
         totalScore: totalScore,
       };
     });
+  };
+
+  const getTotalScore = (rolls) => {
+    let totalScore = 0;
+    for (let i = 0; i < rolls.length; i++) {
+      totalScore += rolls[i];
+    }
+
+    return totalScore;
   };
 
   return (
