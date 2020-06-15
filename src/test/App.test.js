@@ -30,7 +30,7 @@ describe("App component", () => {
     expect(wrapper.find(Scorecard).props().roll[0]).toEqual(0);
   });
 
-  it("should score gutter gameas as 0, if player scores 0 for all frames", () => {
+  it("should score gutter game as 0, if all frames score are 0", () => {
     const wrapper = mount(<App />);
     const startButton = wrapper.find(Pins).find("button").at(0);
     for (let i = 0; i < 20; i++) {
