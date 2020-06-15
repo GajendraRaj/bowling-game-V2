@@ -9,6 +9,6 @@ describe("Controls component", () => {
   });
 
   it("should render buttons", () => {
-    expect(wrapper.find("button").length).toEqual(1);
+    expect(wrapper.find("button").length).toEqual(2);
   });
 });

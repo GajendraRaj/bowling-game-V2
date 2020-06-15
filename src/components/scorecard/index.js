@@ -26,7 +26,7 @@ const Scorecard = (props) => {
           <tr>
             <Rolls roll={props.roll} />
             <td id="total-score" colSpan="6">
-              0
+              {props.totalScore}
             </td>
           </tr>
           <tr>{footer()}</tr>

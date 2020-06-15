@@ -7,16 +7,24 @@ import "./App.css";
 const App = () => {
   const initialState = {
     roll: [],
+    totalScore: 0,
   };
   const [gameState, setGameState] = useState(initialState);
 
-  const updateScores = () => {
-    const newRoll = [...gameState.roll, 0];
+  const updateScores = (downPins) => {
+    const newRoll = [...gameState.roll, downPins];
+    let totalScore = 0;
+    if (newRoll.length > 0) {
+      for (let i = 0; i < newRoll.length; i++) {
+        totalScore += newRoll[i];
+      }
+    }
 
     setGameState((prevState) => {
       return {
         ...prevState,
         roll: newRoll,
+        totalScore: totalScore,
       };
     });
   };
@@ -27,7 +35,7 @@ const App = () => {
         <h1>{Constants.APP_TITLE}</h1>
       </header>
       <div className="Game">
-        <Scorecard roll={gameState.roll} />
+        <Scorecard roll={gameState.roll} totalScore={gameState.totalScore} />
         <Pins pinsDown={updateScores} />
       </div>
     </div>

@@ -39,4 +39,24 @@ describe("App component", () => {
     const totalScore = wrapper.find(Scorecard).find("#total-score").text();
     expect(totalScore).toEqual("0");
   });
+
+  it("should score gutter game as 0, if all frames score are 0", () => {
+    const wrapper = mount(<App />);
+    const startButton = wrapper.find(Pins).find("button").at(0);
+    for (let i = 0; i < 20; i++) {
+      startButton.simulate("click");
+    }
+    const totalScore = wrapper.find(Scorecard).find("#total-score").text();
+    expect(totalScore).toEqual("0");
+  });
+
+  it("should score game as 20, if all frames score are 1", () => {
+    const wrapper = mount(<App />);
+    const startButton = wrapper.find(Pins).find("button").at(1);
+    for (let i = 0; i < 20; i++) {
+      startButton.simulate("click");
+    }
+    const totalScore = wrapper.find(Scorecard).find("#total-score").text();
+    expect(totalScore).toEqual("20");
+  });
 });
