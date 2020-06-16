@@ -48,7 +48,11 @@ const App = () => {
       </header>
       <div className="Game">
         <Scorecard roll={gameState.roll} totalScore={gameState.totalScore} />
-        <Pins pinsDown={updateScores} gameOver={gameState.gameOver} />
+        <Pins
+          pinsDown={updateScores}
+          gameOver={gameState.gameOver}
+          roll={gameState.roll}
+        />
       </div>
     </div>
   );

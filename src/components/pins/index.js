@@ -9,7 +9,7 @@ const Pins = (props) => {
         <button
           id={"pin" + i}
           key={i}
-          disabled={props.gameOver}
+          disabled={disablePin(i)}
           onClick={() => props.pinsDown(i)}
         >
           {i}
@@ -18,6 +18,16 @@ const Pins = (props) => {
     }
 
     return pins;
+  };
+
+  const disablePin = (number) => {
+    if (props.gameOver) {
+      return true;
+    }
+    if (props.roll.length % 2 === 0 || props.roll.length === 0) {
+      return false;
+    }
+    return props.roll[props.roll.length - 1] + number > 10;
   };
 
   return <div className="Container">{getPins()}</div>;

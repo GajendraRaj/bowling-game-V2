@@ -37,6 +37,7 @@ describe("App component", () => {
       startButton.simulate("click");
     }
     const totalScore = wrapper.find(Scorecard).find("#total-score").text();
+
     expect(totalScore).toEqual("0");
   });
 
@@ -47,6 +48,7 @@ describe("App component", () => {
       startButton.simulate("click");
     }
     const totalScore = wrapper.find(Scorecard).find("#total-score").text();
+
     expect(totalScore).toEqual("0");
   });
 
@@ -57,6 +59,7 @@ describe("App component", () => {
       startButton.simulate("click");
     }
     const totalScore = wrapper.find(Scorecard).find("#total-score").text();
+
     expect(totalScore).toEqual("20");
   });
 
@@ -68,10 +71,51 @@ describe("App component", () => {
       startButton1.simulate("click");
       startButton2.simulate("click");
     }
+
     expect(wrapper.find(Pins).find("button").at(0).prop("disabled")).toEqual(
       true
     );
     expect(wrapper.find(Pins).find("button").at(1).prop("disabled")).toEqual(
+      true
+    );
+  });
+
+  it("should disable the pin if sum of the last roll and its value is greater than 10", () => {
+    const wrapper = mount(<App />);
+    const pin5 = wrapper.find(Pins).find("button").at(5);
+    pin5.simulate("click");
+
+    expect(wrapper.find(Pins).find("button").at(0).prop("disabled")).toEqual(
+      false
+    );
+    expect(wrapper.find(Pins).find("button").at(1).prop("disabled")).toEqual(
+      false
+    );
+    expect(wrapper.find(Pins).find("button").at(2).prop("disabled")).toEqual(
+      false
+    );
+    expect(wrapper.find(Pins).find("button").at(3).prop("disabled")).toEqual(
+      false
+    );
+    expect(wrapper.find(Pins).find("button").at(4).prop("disabled")).toEqual(
+      false
+    );
+    expect(wrapper.find(Pins).find("button").at(5).prop("disabled")).toEqual(
+      false
+    );
+    expect(wrapper.find(Pins).find("button").at(6).prop("disabled")).toEqual(
+      true
+    );
+    expect(wrapper.find(Pins).find("button").at(7).prop("disabled")).toEqual(
+      true
+    );
+    expect(wrapper.find(Pins).find("button").at(8).prop("disabled")).toEqual(
+      true
+    );
+    expect(wrapper.find(Pins).find("button").at(9).prop("disabled")).toEqual(
+      true
+    );
+    expect(wrapper.find(Pins).find("button").at(10).prop("disabled")).toEqual(
       true
     );
   });
