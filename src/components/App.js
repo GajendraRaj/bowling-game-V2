@@ -8,7 +8,6 @@ const App = () => {
   const initialState = {
     roll: [],
     totalScore: 0,
-    gameOver: false,
     activePins: 10,
   };
   const [gameState, setGameState] = useState(initialState);
@@ -17,7 +16,6 @@ const App = () => {
     const newRoll = [...gameState.roll, downPins];
     const totalScore =
       newRoll.length > 0 ? getTotalScore(newRoll) : gameState.totalScore;
-    const gaveOver = isGameOver(newRoll);
     const activePins = getActivePins(newRoll);
 
     setGameState((prevState) => {
@@ -25,7 +23,6 @@ const App = () => {
         ...prevState,
         roll: newRoll,
         totalScore: totalScore,
-        gameOver: gaveOver,
         activePins: activePins,
       };
     });
@@ -40,12 +37,10 @@ const App = () => {
     return totalScore;
   };
 
-  const isGameOver = (rolls) => {
-    return rolls.length < 20 ? false : true;
-  };
-
   const getActivePins = (roll) => {
-    if (isEven(roll)) {
+    if (roll.length === 20) {
+      return -1;
+    } else if (isEven(roll)) {
       return 10;
     } else {
       const lastRoll = roll[roll.length - 1];
@@ -64,11 +59,7 @@ const App = () => {
       </header>
       <div className="Game">
         <Scorecard roll={gameState.roll} totalScore={gameState.totalScore} />
-        <Pins
-          pinsDown={updateScores}
-          gameOver={gameState.gameOver}
-          activePins={gameState.activePins}
-        />
+        <Pins pinsDown={updateScores} activePins={gameState.activePins} />
       </div>
     </div>
   );

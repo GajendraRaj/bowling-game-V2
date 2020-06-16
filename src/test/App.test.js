@@ -72,12 +72,8 @@ describe("App component", () => {
       startButton2.simulate("click");
     }
 
-    expect(wrapper.find(Pins).find("button").at(0).prop("disabled")).toEqual(
-      true
-    );
-    expect(wrapper.find(Pins).find("button").at(1).prop("disabled")).toEqual(
-      true
-    );
+    expect(wrapper.find(Pins).find("button").at(0)).toHaveLength(0);
+    expect(wrapper.find(Pins).find("button").at(1)).toHaveLength(0);
   });
 
   it("should hide the pin if sum of the last roll and its value is greater than 10", () => {
@@ -85,24 +81,12 @@ describe("App component", () => {
     const pin = wrapper.find(Pins).find("button").at(5);
     pin.simulate("click");
 
-    expect(wrapper.find(Pins).find("button").at(0).prop("disabled")).toEqual(
-      false
-    );
-    expect(wrapper.find(Pins).find("button").at(1).prop("disabled")).toEqual(
-      false
-    );
-    expect(wrapper.find(Pins).find("button").at(2).prop("disabled")).toEqual(
-      false
-    );
-    expect(wrapper.find(Pins).find("button").at(3).prop("disabled")).toEqual(
-      false
-    );
-    expect(wrapper.find(Pins).find("button").at(4).prop("disabled")).toEqual(
-      false
-    );
-    expect(wrapper.find(Pins).find("button").at(5).prop("disabled")).toEqual(
-      false
-    );
+    expect(wrapper.find(Pins).find("button").at(0)).toHaveLength(1);
+    expect(wrapper.find(Pins).find("button").at(1)).toHaveLength(1);
+    expect(wrapper.find(Pins).find("button").at(2)).toHaveLength(1);
+    expect(wrapper.find(Pins).find("button").at(3)).toHaveLength(1);
+    expect(wrapper.find(Pins).find("button").at(4)).toHaveLength(1);
+    expect(wrapper.find(Pins).find("button").at(5)).toHaveLength(1);
     expect(wrapper.find(Pins).find("button").at(6)).toHaveLength(0);
     expect(wrapper.find(Pins).find("button").at(7)).toHaveLength(0);
     expect(wrapper.find(Pins).find("button").at(8)).toHaveLength(0);
