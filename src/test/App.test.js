@@ -93,4 +93,20 @@ describe("App component", () => {
     expect(wrapper.find(Pins).find("button").at(9)).toHaveLength(0);
     expect(wrapper.find(Pins).find("button").at(10)).toHaveLength(0);
   });
+
+  it("should generate correct frames score till 9th frame, if roll is spare", () => {
+    const wrapper = mount(<App />);
+    for (let i = 0; i < 9; i++) {
+      const startButton1 = wrapper.find(Pins).find("button").at(5);
+      const startButton2 = wrapper.find(Pins).find("button").at(5);
+      startButton1.simulate("click");
+      startButton2.simulate("click");
+      if (i === 8) {
+        const startButton3 = wrapper.find(Pins).find("button").at(5);
+        startButton3.simulate("click");
+      }
+    }
+
+    expect(wrapper.find(Scorecard).props().totalScore).toEqual(135);
+  });
 });

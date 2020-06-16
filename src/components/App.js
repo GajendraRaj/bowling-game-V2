@@ -15,10 +15,10 @@ const App = () => {
 
   const updateScores = (downPins) => {
     const newRoll = [...gameState.roll, downPins];
-    const totalScore =
-      newRoll.length > 0 ? getTotalScore(newRoll) : gameState.totalScore;
     const activePins = getActivePins(newRoll);
     const score = getFramesScore(newRoll);
+    const totalScore =
+      score.length > 0 ? score[score.length - 1] : gameState.totalScore;
 
     setGameState((prevState) => {
       return {
@@ -29,15 +29,6 @@ const App = () => {
         score: score,
       };
     });
-  };
-
-  const getTotalScore = (rolls) => {
-    let totalScore = 0;
-    for (let i = 0; i < rolls.length; i++) {
-      totalScore += rolls[i];
-    }
-
-    return totalScore;
   };
 
   const getActivePins = (roll) => {
@@ -57,13 +48,22 @@ const App = () => {
 
   const getFramesScore = (rolls) => {
     let frameScore = [];
-
+    let total = 0;
     for (let roll = 0; roll < rolls.length; roll = roll + 2) {
       const roll1 = rolls[roll];
       const roll2 = rolls[roll + 1] !== undefined ? rolls[roll + 1] : "";
 
       if (roll2 !== "") {
-        frameScore.push(roll1 + roll2);
+        total += roll1 + roll2;
+
+        if (roll1 + roll2 === 10) {
+          if (rolls[roll + 2] !== undefined) {
+            frameScore.push(total + rolls[roll + 2]);
+            total += rolls[roll + 2];
+          }
+        } else {
+          frameScore.push(total);
+        }
       }
     }
 
