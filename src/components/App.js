@@ -57,11 +57,13 @@ const App = () => {
 
   const getFramesScore = (rolls) => {
     let frameScore = [];
-    if (rolls.length >= 2) {
-      for (let roll = 0; roll < rolls.length; roll = roll + 2) {
-        if (rolls[roll + 1] !== undefined) {
-          frameScore.push(rolls[roll] + rolls[roll + 1]);
-        }
+
+    for (let roll = 0; roll < rolls.length; roll = roll + 2) {
+      const roll1 = rolls[roll];
+      const roll2 = rolls[roll + 1] !== undefined ? rolls[roll + 1] : "";
+
+      if (roll2 !== "") {
+        frameScore.push(roll1 + roll2);
       }
     }
 
