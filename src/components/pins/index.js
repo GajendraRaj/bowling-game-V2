@@ -4,7 +4,7 @@ import "./index.css";
 const Pins = (props) => {
   const getPins = () => {
     const pins = [];
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i <= 10; i++) {
       pins.push(
         <button
           id={"pin" + i}

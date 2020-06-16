@@ -8,7 +8,7 @@ describe("Controls component", () => {
     wrapper = shallow(<Pins />);
   });
 
-  it("should render buttons", () => {
-    expect(wrapper.find("button").length).toEqual(2);
+  it("should render all pins (0-10)", () => {
+    expect(wrapper.find("button").length).toEqual(11);
   });
 });
