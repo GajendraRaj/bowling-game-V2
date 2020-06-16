@@ -56,7 +56,19 @@ const App = () => {
       if (roll2 !== "") {
         total += roll1 + roll2;
 
-        if (isSpare(roll1, roll2)) {
+        if (roll1 === 10) {
+          if (rolls[roll + 2] !== undefined) {
+            total += rolls[roll + 2];
+            if (rolls[roll + 2] === 10) {
+              if (rolls[roll + 4] !== undefined) {
+                total += rolls[roll + 4];
+              }
+            } else {
+              total += roll[roll + 3];
+            }
+            frameScore.push(total);
+          }
+        } else if (isSpare(roll1, roll2)) {
           const roll3 = rolls[roll + 2] !== undefined ? rolls[roll + 2] : "";
           if (roll3 !== "") {
             frameScore.push(total + roll3);

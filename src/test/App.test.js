@@ -109,4 +109,20 @@ describe("App component", () => {
 
     expect(wrapper.find(Scorecard).props().totalScore).toEqual(135);
   });
+
+  it("should generate correct frames score till 9th frame, if roll is strike", () => {
+    const wrapper = mount(<App />);
+    for (let i = 0; i < 9; i++) {
+      const startButton1 = wrapper.find(Pins).find("button").at(10);
+      const startButton2 = wrapper.find(Pins).find("button").at(0);
+      startButton1.simulate("click");
+      startButton2.simulate("click");
+      if (i === 8) {
+        const startButton3 = wrapper.find(Pins).find("button").at(10);
+        startButton3.simulate("click");
+      }
+    }
+
+    expect(wrapper.find(Scorecard).props().totalScore).toEqual(260);
+  });
 });
