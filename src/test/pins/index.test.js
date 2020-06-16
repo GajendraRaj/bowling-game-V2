@@ -5,7 +5,7 @@ import Pins from "../../components/pins";
 describe("Controls component", () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(<Pins roll={[]} gameOver={true} />);
+    wrapper = shallow(<Pins activePins={10} gameOver={true} />);
   });
 
   it("should render all pins (0-10)", () => {

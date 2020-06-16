@@ -9,6 +9,7 @@ const App = () => {
     roll: [],
     totalScore: 0,
     gameOver: false,
+    activePins: 10,
   };
   const [gameState, setGameState] = useState(initialState);
 
@@ -17,6 +18,7 @@ const App = () => {
     const totalScore =
       newRoll.length > 0 ? getTotalScore(newRoll) : gameState.totalScore;
     const gaveOver = isGameOver(newRoll);
+    const activePins = getActivePins(newRoll);
 
     setGameState((prevState) => {
       return {
@@ -24,6 +26,7 @@ const App = () => {
         roll: newRoll,
         totalScore: totalScore,
         gameOver: gaveOver,
+        activePins: activePins,
       };
     });
   };
@@ -41,6 +44,19 @@ const App = () => {
     return rolls.length < 20 ? false : true;
   };
 
+  const getActivePins = (roll) => {
+    if (isEven(roll)) {
+      return 10;
+    } else {
+      const lastRoll = roll[roll.length - 1];
+      return 10 - lastRoll;
+    }
+  };
+
+  const isEven = (roll) => {
+    return roll.length % 2 === 0;
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -51,7 +67,7 @@ const App = () => {
         <Pins
           pinsDown={updateScores}
           gameOver={gameState.gameOver}
-          roll={gameState.roll}
+          activePins={gameState.activePins}
         />
       </div>
     </div>
