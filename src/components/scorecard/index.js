@@ -13,7 +13,11 @@ const Scorecard = (props) => {
   const footer = () => {
     let bottomLine = [];
     for (let i = 0; i < 11; i++) {
-      bottomLine.push(<td id={"frame" + i} key={"frame" + i} colSpan="6"></td>);
+      bottomLine.push(
+        <td id={"frame" + i} key={"frame" + i} colSpan="6">
+          {props.score[i]}
+        </td>
+      );
     }
     return bottomLine;
   };

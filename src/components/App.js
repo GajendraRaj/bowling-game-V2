@@ -7,6 +7,7 @@ import "./App.css";
 const App = () => {
   const initialState = {
     roll: [],
+    score: [],
     totalScore: 0,
     activePins: 10,
   };
@@ -17,6 +18,7 @@ const App = () => {
     const totalScore =
       newRoll.length > 0 ? getTotalScore(newRoll) : gameState.totalScore;
     const activePins = getActivePins(newRoll);
+    const score = getFramesScore(newRoll);
 
     setGameState((prevState) => {
       return {
@@ -24,6 +26,7 @@ const App = () => {
         roll: newRoll,
         totalScore: totalScore,
         activePins: activePins,
+        score: score,
       };
     });
   };
@@ -52,13 +55,30 @@ const App = () => {
     return roll.length % 2 === 0;
   };
 
+  const getFramesScore = (rolls) => {
+    let frameScore = [];
+    if (rolls.length >= 2) {
+      for (let roll = 0; roll < rolls.length; roll = roll + 2) {
+        if (rolls[roll + 1] !== undefined) {
+          frameScore.push(rolls[roll] + rolls[roll + 1]);
+        }
+      }
+    }
+
+    return frameScore;
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>{Constants.APP_TITLE}</h1>
       </header>
       <div className="Game">
-        <Scorecard roll={gameState.roll} totalScore={gameState.totalScore} />
+        <Scorecard
+          roll={gameState.roll}
+          score={gameState.score}
+          totalScore={gameState.totalScore}
+        />
         <Pins pinsDown={updateScores} activePins={gameState.activePins} />
       </div>
     </div>
