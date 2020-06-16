@@ -56,23 +56,27 @@ const App = () => {
       if (roll2 !== "") {
         total += roll1 + roll2;
 
-        if (roll1 === 10) {
-          if (rolls[roll + 2] !== undefined) {
-            total += rolls[roll + 2];
-            if (rolls[roll + 2] === 10) {
-              if (rolls[roll + 4] !== undefined) {
-                total += rolls[roll + 4];
+        if (isStrike(roll1)) {
+          const roll3 = rolls[roll + 2] !== undefined ? rolls[roll + 2] : "";
+          if (roll3 !== "") {
+            total += roll3;
+            if (isStrike(roll3)) {
+              const roll4 =
+                rolls[roll + 4] !== undefined ? rolls[roll + 4] : "";
+              if (roll4 !== "") {
+                total += roll4;
               }
             } else {
               total += roll[roll + 3];
             }
+
             frameScore.push(total);
           }
         } else if (isSpare(roll1, roll2)) {
           const roll3 = rolls[roll + 2] !== undefined ? rolls[roll + 2] : "";
           if (roll3 !== "") {
-            frameScore.push(total + roll3);
-            total += rolls[roll + 2];
+            total += roll3;
+            frameScore.push(total);
           }
         } else {
           frameScore.push(total);
@@ -85,6 +89,10 @@ const App = () => {
 
   const isSpare = (roll1, roll2) => {
     return roll1 + roll2 === 10;
+  };
+
+  const isStrike = (roll1) => {
+    return roll1 === 10;
   };
 
   return (
