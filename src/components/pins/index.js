@@ -6,7 +6,12 @@ const Pins = (props) => {
     const pins = [];
     for (let i = 0; i < 2; i++) {
       pins.push(
-        <button id={"pin" + i} key={i} onClick={() => props.pinsDown(i)}>
+        <button
+          id={"pin" + i}
+          key={i}
+          disabled={props.gameOver}
+          onClick={() => props.pinsDown(i)}
+        >
           {i}
         </button>
       );
@@ -14,6 +19,7 @@ const Pins = (props) => {
 
     return pins;
   };
+
   return <div className="Container">{getPins()}</div>;
 };
 

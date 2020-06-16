@@ -59,4 +59,20 @@ describe("App component", () => {
     const totalScore = wrapper.find(Scorecard).find("#total-score").text();
     expect(totalScore).toEqual("20");
   });
+
+  it("should disabled the input buttons if 20 rolls completed.", () => {
+    const wrapper = mount(<App />);
+    for (let i = 0; i < 10; i++) {
+      const startButton1 = wrapper.find(Pins).find("button").at(0);
+      const startButton2 = wrapper.find(Pins).find("button").at(1);
+      startButton1.simulate("click");
+      startButton2.simulate("click");
+    }
+    expect(wrapper.find(Pins).find("button").at(0).prop("disabled")).toEqual(
+      true
+    );
+    expect(wrapper.find(Pins).find("button").at(1).prop("disabled")).toEqual(
+      true
+    );
+  });
 });

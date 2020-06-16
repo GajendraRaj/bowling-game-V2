@@ -8,6 +8,7 @@ const App = () => {
   const initialState = {
     roll: [],
     totalScore: 0,
+    gameOver: false,
   };
   const [gameState, setGameState] = useState(initialState);
 
@@ -21,6 +22,7 @@ const App = () => {
         ...prevState,
         roll: newRoll,
         totalScore: totalScore,
+        gameOver: newRoll.length < 20 ? false : true,
       };
     });
   };
@@ -41,7 +43,7 @@ const App = () => {
       </header>
       <div className="Game">
         <Scorecard roll={gameState.roll} totalScore={gameState.totalScore} />
-        <Pins pinsDown={updateScores} />
+        <Pins pinsDown={updateScores} gameOver={gameState.gameOver} />
       </div>
     </div>
   );
