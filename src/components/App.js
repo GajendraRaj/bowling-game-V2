@@ -16,13 +16,14 @@ const App = () => {
     const newRoll = [...gameState.roll, downPins];
     const totalScore =
       newRoll.length > 0 ? getTotalScore(newRoll) : gameState.totalScore;
+    const gaveOver = isGameOver(newRoll);
 
     setGameState((prevState) => {
       return {
         ...prevState,
         roll: newRoll,
         totalScore: totalScore,
-        gameOver: newRoll.length < 20 ? false : true,
+        gameOver: gaveOver,
       };
     });
   };
@@ -34,6 +35,10 @@ const App = () => {
     }
 
     return totalScore;
+  };
+
+  const isGameOver = (rolls) => {
+    return rolls.length < 20 ? false : true;
   };
 
   return (
