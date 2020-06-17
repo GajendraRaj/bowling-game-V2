@@ -125,4 +125,20 @@ describe("App component", () => {
 
     expect(wrapper.find(Scorecard).props().totalScore).toEqual(260);
   });
+
+  it("should generate last frame score correctly if got the spare bouns in last frame", () => {
+    const wrapper = mount(<App />);
+    for (let i = 0; i < 10; i++) {
+      const startButton1 = wrapper.find(Pins).find("button").at(5);
+      const startButton2 = wrapper.find(Pins).find("button").at(5);
+      startButton1.simulate("click");
+      startButton2.simulate("click");
+      if (i === 9) {
+        const startButton3 = wrapper.find(Pins).find("button").at(5);
+        startButton3.simulate("click");
+      }
+    }
+
+    expect(wrapper.find(Scorecard).props().totalScore).toEqual(150);
+  });
 });

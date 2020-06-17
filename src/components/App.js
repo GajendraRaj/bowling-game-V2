@@ -32,7 +32,22 @@ const App = () => {
   };
 
   const getActivePins = (roll) => {
-    if (roll.length === Constants.MAX_ROLLS_LENGTH) {
+    if (roll.length >= 19) {
+      if (roll.length < 21) {
+        if (roll.length === 19) {
+          const lastRoll = roll[roll.length - 1];
+          return Constants.ACTIVE_PINS - lastRoll;
+        } else {
+          if (isSpare(roll[roll.length - 1], roll[roll.length - 2])) {
+            return Constants.ACTIVE_PINS;
+          } else if (isStrike(roll[roll.length - 2])) {
+            const lastRoll = roll[roll.length - 1];
+            return Constants.ACTIVE_PINS - lastRoll;
+          } else {
+            return -1;
+          }
+        }
+      }
       return -1;
     } else if (isEven(roll)) {
       return Constants.ACTIVE_PINS;
@@ -56,11 +71,14 @@ const App = () => {
       if (roll2 !== "") {
         total += roll1 + roll2;
         const roll3 = isRollExist(roll + 2, rolls);
-        if (roll3 !== "") {
-          if (isStrike(roll1)) {
+
+        if (isStrike(roll1)) {
+          if (roll3 !== "") {
             total += calculateStrikeBonus(roll, roll3, rolls);
             frameScore.push(total);
-          } else if (isSpare(roll1, roll2)) {
+          }
+        } else if (isSpare(roll1, roll2)) {
+          if (roll3 !== "") {
             total += roll3;
             frameScore.push(total);
           }
