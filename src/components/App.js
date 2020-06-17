@@ -35,19 +35,18 @@ const App = () => {
     if (roll.length >= 19) {
       if (roll.length < 21) {
         if (roll.length === 19) {
-          const lastRoll = roll[roll.length - 1];
-          return Constants.ACTIVE_PINS - lastRoll;
+          return Constants.ACTIVE_PINS - getLastRoll(roll);
         } else {
           if (isSpare(roll[roll.length - 1], roll[roll.length - 2])) {
             return Constants.ACTIVE_PINS;
           } else if (isStrike(roll[roll.length - 2])) {
-            const lastRoll = roll[roll.length - 1];
-            return Constants.ACTIVE_PINS - lastRoll;
+            return Constants.ACTIVE_PINS - getLastRoll(roll);
           } else {
             return -1;
           }
         }
       }
+
       return -1;
     } else if (isEven(roll)) {
       return Constants.ACTIVE_PINS;
@@ -55,6 +54,10 @@ const App = () => {
       const lastRoll = roll[roll.length - 1];
       return Constants.ACTIVE_PINS - lastRoll;
     }
+  };
+
+  const getLastRoll = (rolls) => {
+    return rolls[rolls.length - 1];
   };
 
   const isEven = (roll) => {
