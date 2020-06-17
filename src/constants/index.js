@@ -3,6 +3,8 @@ const Constants = {
   TOTAL_SCORE: 0,
   ACTIVE_PINS: 10,
   MAX_ROLLS_LENGTH: 20,
+  LAST_FRAME_ROLL_INDEX: 19,
+  BONOUS_ROLL_INDEX: 21,
   SCORECARD_TITLES: [
     "Frame 1",
     "Frame 2",

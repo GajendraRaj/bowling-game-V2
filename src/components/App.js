@@ -32,9 +32,9 @@ const App = () => {
   };
 
   const getActivePins = (roll) => {
-    if (roll.length >= 19) {
-      if (roll.length < 21) {
-        if (roll.length === 19) {
+    if (roll.length >= Constants.LAST_FRAME_ROLL_INDEX) {
+      if (roll.length < Constants.BONOUS_ROLL_INDEX) {
+        if (roll.length === Constants.LAST_FRAME_ROLL_INDEX) {
           return Constants.ACTIVE_PINS - getLastRoll(roll);
         } else {
           if (isSpare(roll[roll.length - 1], roll[roll.length - 2])) {
