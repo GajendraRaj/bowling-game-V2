@@ -35,9 +35,15 @@ const App = () => {
     if (roll.length >= Constants.LAST_FRAME_ROLL_INDEX) {
       if (roll.length < Constants.BONOUS_ROLL_INDEX) {
         if (roll.length === Constants.LAST_FRAME_ROLL_INDEX) {
-          return Constants.ACTIVE_PINS - getLastRoll(roll);
+          if (isStrike(getLastRoll(roll))) {
+            return Constants.ACTIVE_PINS;
+          } else {
+            return Constants.ACTIVE_PINS - getLastRoll(roll);
+          }
         } else {
-          if (isSpare(roll[roll.length - 1], roll[roll.length - 2])) {
+          if (isStrike(getLastRoll(roll))) {
+            return Constants.ACTIVE_PINS;
+          } else if (isSpare(roll[roll.length - 1], roll[roll.length - 2])) {
             return Constants.ACTIVE_PINS;
           } else if (isStrike(roll[roll.length - 2])) {
             return Constants.ACTIVE_PINS - getLastRoll(roll);

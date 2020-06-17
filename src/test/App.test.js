@@ -141,4 +141,27 @@ describe("App component", () => {
 
     expect(wrapper.find(Scorecard).props().totalScore).toEqual(150);
   });
+
+  it("should generate last frame score correctly if gets the strike bonus in last frame", () => {
+    const wrapper = mount(<App />);
+    for (let i = 0; i < 10; i++) {
+      if (i !== 9) {
+        const startButton1 = wrapper.find(Pins).find("button").at(10);
+        const startButton2 = wrapper.find(Pins).find("button").at(0);
+        startButton1.simulate("click");
+        startButton2.simulate("click");
+      } else {
+        if (i === 9) {
+          const startButton1 = wrapper.find(Pins).find("button").at(10);
+          const startButton2 = wrapper.find(Pins).find("button").at(10);
+          const startButton3 = wrapper.find(Pins).find("button").at(10);
+          startButton1.simulate("click");
+          startButton2.simulate("click");
+          startButton3.simulate("click");
+        }
+      }
+    }
+
+    expect(wrapper.find(Scorecard).props().totalScore).toEqual(300);
+  });
 });
