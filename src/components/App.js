@@ -55,26 +55,12 @@ const App = () => {
 
       if (roll2 !== "") {
         total += roll1 + roll2;
-
-        if (isStrike(roll1)) {
-          const roll3 = rolls[roll + 2] !== undefined ? rolls[roll + 2] : "";
-          if (roll3 !== "") {
-            total += roll3;
-            if (isStrike(roll3)) {
-              const roll4 =
-                rolls[roll + 4] !== undefined ? rolls[roll + 4] : "";
-              if (roll4 !== "") {
-                total += roll4;
-              }
-            } else {
-              total += roll[roll + 3];
-            }
-
+        const roll3 = isRollExist(roll + 2, rolls);
+        if (roll3 !== "") {
+          if (isStrike(roll1)) {
+            total += calculateStrikeBonus(roll, roll3, rolls);
             frameScore.push(total);
-          }
-        } else if (isSpare(roll1, roll2)) {
-          const roll3 = rolls[roll + 2] !== undefined ? rolls[roll + 2] : "";
-          if (roll3 !== "") {
+          } else if (isSpare(roll1, roll2)) {
             total += roll3;
             frameScore.push(total);
           }
@@ -85,6 +71,27 @@ const App = () => {
     }
 
     return frameScore;
+  };
+
+  const calculateStrikeBonus = (roll, roll3, rolls) => {
+    let total = roll3;
+    if (isStrike(roll3)) {
+      const roll4 = isRollExist(roll + 4, rolls);
+      if (roll4 !== "") {
+        total += roll4;
+      }
+    } else {
+      const roll4 = isRollExist(roll + 3, rolls);
+      if (roll4 !== "") {
+        total += roll4;
+      }
+    }
+
+    return total;
+  };
+
+  const isRollExist = (roll, rolls) => {
+    return rolls[roll] !== undefined ? rolls[roll] : "";
   };
 
   const isSpare = (roll1, roll2) => {
