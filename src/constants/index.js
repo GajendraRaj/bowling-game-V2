@@ -1,5 +1,8 @@
 const Constants = {
   APP_TITLE: "Bowling Game",
+  TOTAL_SCORE: 0,
+  ACTIVE_PINS: 10,
+  MAX_ROLLS_LENGTH: 20,
   SCORECARD_TITLES: [
     "Frame 1",
     "Frame 2",
@@ -12,28 +15,6 @@ const Constants = {
     "Frame 9",
     "Frame 10",
     "Total Score",
-  ],
-  SCORECARD_ROLLS: [
-    "r1",
-    "r2",
-    "r3",
-    "r4",
-    "r5",
-    "r6",
-    "r7",
-    "r8",
-    "r9",
-    "r10",
-    "r11",
-    "r12",
-    "r13",
-    "r14",
-    "r15",
-    "r16",
-    "r17",
-    "r18",
-    "r19",
-    "r20",
   ],
 };
 

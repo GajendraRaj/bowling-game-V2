@@ -8,8 +8,8 @@ const App = () => {
   const initialState = {
     roll: [],
     score: [],
-    totalScore: 0,
-    activePins: 10,
+    totalScore: Constants.TOTAL_SCORE,
+    activePins: Constants.ACTIVE_PINS,
   };
   const [gameState, setGameState] = useState(initialState);
 
@@ -32,13 +32,13 @@ const App = () => {
   };
 
   const getActivePins = (roll) => {
-    if (roll.length === 20) {
+    if (roll.length === Constants.MAX_ROLLS_LENGTH) {
       return -1;
     } else if (isEven(roll)) {
-      return 10;
+      return Constants.ACTIVE_PINS;
     } else {
       const lastRoll = roll[roll.length - 1];
-      return 10 - lastRoll;
+      return Constants.ACTIVE_PINS - lastRoll;
     }
   };
 
